@@ -140,6 +140,10 @@ By default, the GUI is turned off. Add ```--gui``` on receiver to open the rende
 ./peerconnection_localvideo --gui --recon "recon.yuv"
 ```
 
+If it's running on Windows system, the parameter need to use '=' to connect, e.g.
+```
+./peerconnection_localvideo --gui --recon="recon.yuv"
+```
 
 3. Start the sender(Should after receiver) with information of yuv file to be streamed.
 
