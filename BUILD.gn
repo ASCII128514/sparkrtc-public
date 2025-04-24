@@ -310,6 +310,10 @@ config("common_config") {
     defines += [ "RTC_DAV1D_IN_INTERNAL_DECODER_FACTORY" ]
   }
 
+  if (rtc_use_libaom_av1_encoder) {
+    defines += [ "RTC_USE_LIBAOM_AV1_ENCODER" ]
+  }
+
   if (rtc_enable_sctp) {
     defines += [ "WEBRTC_HAVE_SCTP" ]
   }
