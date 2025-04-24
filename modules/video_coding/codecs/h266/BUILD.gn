@@ -1,0 +1,103 @@
+# Copyright (c) 2025 The WebRTC project authors. All Rights Reserved.
+#
+# Use of this source code is governed by a BSD-style license
+# that can be found in the LICENSE file in the root of the source
+# tree. An additional intellectual property rights grant can be found
+# in the file PATENTS.  All contributing project authors may
+# be found in the AUTHORS file in the root of the source tree.
+
+import("../../../../webrtc.gni")
+
+declare_args() {
+  # Enable H.266 encoder using VVenC
+  rtc_use_vvenc_h266_encoder = rtc_use_h266
+
+  # Enable H.266 decoder using VVdeC
+  rtc_use_vvdec_h266_decoder = rtc_use_h266
+}
+
+rtc_library("vvenc_h266_encoder") {
+  visibility = [ "*" ]
+  poisonous = [ "software_video_codecs" ]
+  public = [ "vvenc_h266_encoder.h" ]
+  sources = [ "vvenc_h266_encoder.cc" ]
+  deps = [
+    "../..:video_codec_interface",
+    "../../../../api:field_trials_view",
+    "../../../../api:scoped_refptr",
+    "../../../../api/transport:field_trial_based_config",
+    "../../../../api/video:encoded_image",
+    "../../../../api/video:video_frame",
+    "../../../../api/video_codecs:video_codecs_api",
+    "../../../../common_video",
+    "../../../../common_video/h266:h266_common",
+    "../../../../rtc_base:checks",
+    "../../../../rtc_base:logging",
+    "../../../../rtc_base:rtc_numerics",
+    "../../../../rtc_base/experiments:encoder_info_settings",
+    "../../svc:scalability_structures",
+    "../../svc:scalable_video_controller",
+    # "//third_party/vvenc",  # Uncomment when VVenC is available
+  ]
+  absl_deps = [
+    "//third_party/abseil-cpp/absl/algorithm:container",
+    "//third_party/abseil-cpp/absl/base:core_headers",
+    "//third_party/abseil-cpp/absl/strings:strings",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+
+  defines = []
+  if (rtc_use_vvenc_h266_encoder) {
+    defines += [ "RTC_USE_VVENC_H266_ENCODER" ]
+  }
+}
+
+rtc_library("vvdec_h266_decoder") {
+  visibility = [ "*" ]
+  poisonous = [ "software_video_codecs" ]
+  public = [ "vvdec_h266_decoder.h" ]
+  sources = [ "vvdec_h266_decoder.cc" ]
+  deps = [
+    "../..:video_codec_interface",
+    "../../../../api:scoped_refptr",
+    "../../../../api/video:encoded_image",
+    "../../../../api/video:video_frame",
+    "../../../../api/video_codecs:video_codecs_api",
+    "../../../../common_video",
+    "../../../../common_video/h266:h266_common",
+    "../../../../rtc_base:logging",
+    # "//third_party/vvdec",  # Uncomment when VVdeC is available
+  ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
+
+  defines = []
+  if (rtc_use_vvdec_h266_decoder) {
+    defines += [ "RTC_USE_VVDEC_H266_DECODER" ]
+  }
+}
+
+if (rtc_include_tests) {
+  rtc_library("video_coding_codecs_h266_tests") {
+    testonly = true
+
+    sources = []
+    deps = []
+
+    if (rtc_use_vvenc_h266_encoder || rtc_use_vvdec_h266_decoder) {
+      sources += [
+        "h266_codec_unittest.cc",
+      ]
+      deps += [
+        "../../../../test:test_support",
+      ]
+
+      if (rtc_use_vvenc_h266_encoder) {
+        deps += [ ":vvenc_h266_encoder" ]
+      }
+
+      if (rtc_use_vvdec_h266_decoder) {
+        deps += [ ":vvdec_h266_decoder" ]
+      }
+    }
+  }
+}
