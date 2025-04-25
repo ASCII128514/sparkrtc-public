@@ -7,14 +7,7 @@
 # be found in the AUTHORS file in the root of the source tree.
 
 import("../../../../webrtc.gni")
-
-declare_args() {
-  # Enable H.266 encoder using VVenC
-  rtc_use_vvenc_h266_encoder = rtc_use_h266
-
-  # Enable H.266 decoder using VVdeC
-  rtc_use_vvdec_h266_decoder = rtc_use_h266
-}
+import("h266_build_flags.gni")
 
 rtc_library("vvenc_h266_encoder") {
   visibility = [ "*" ]
