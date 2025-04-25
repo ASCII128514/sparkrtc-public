@@ -8,10 +8,19 @@
 
 import("../../../../webrtc.gni")
 
-declare_args() {
-  # Enable H.266 encoder using VVenC
-  rtc_use_vvenc_h266_encoder = rtc_use_h266
+# Check if the required third-party dependencies are available
+_has_vvenc_dependency = exec_script("../../../../build/dir_exists.py",
+                                   [ "//third_party/vvenc" ],
+                                   "string") == "True"
 
-  # Enable H.266 decoder using VVdeC
-  rtc_use_vvdec_h266_decoder = rtc_use_h266
+_has_vvdec_dependency = exec_script("../../../../build/dir_exists.py",
+                                   [ "//third_party/vvdec" ],
+                                   "string") == "True"
+
+declare_args() {
+  # Enable H.266 encoder using VVenC (only if the dependency is available)
+  rtc_use_vvenc_h266_encoder = rtc_use_h266 && _has_vvenc_dependency
+
+  # Enable H.266 decoder using VVdeC (only if the dependency is available)
+  rtc_use_vvdec_h266_decoder = rtc_use_h266 && _has_vvdec_dependency
 }

@@ -30,8 +30,13 @@ rtc_library("vvenc_h266_encoder") {
     "../../../../rtc_base/experiments:encoder_info_settings",
     "../../svc:scalability_structures",
     "../../svc:scalable_video_controller",
-    "//third_party/vvenc",
   ]
+  
+  # Only include the VVenC dependency if it's available
+  if (_has_vvenc_dependency) {
+    deps += [ "//third_party/vvenc" ]
+  }
+  
   absl_deps = [
     "//third_party/abseil-cpp/absl/algorithm:container",
     "//third_party/abseil-cpp/absl/base:core_headers",
@@ -59,8 +64,13 @@ rtc_library("vvdec_h266_decoder") {
     "../../../../common_video",
     "../../../../common_video/h266:h266_common",
     "../../../../rtc_base:logging",
-    "//third_party/vvdec",
   ]
+  
+  # Only include the VVdeC dependency if it's available
+  if (_has_vvdec_dependency) {
+    deps += [ "//third_party/vvdec" ]
+  }
+  
   absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
 
   defines = []
