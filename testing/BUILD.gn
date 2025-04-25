@@ -1,0 +1,4 @@
+# Simplified testing BUILD.gn for standalone build
+
+group("test_support") {
+}

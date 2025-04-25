@@ -1,0 +1,6 @@
+# Simplified test.gni for standalone build
+
+# Test defaults.
+test_defaults = {
+  # No tests by default
+}
