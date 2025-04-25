@@ -638,6 +638,18 @@ rtc_source_set("type_traits") {
   sources = [ "type_traits.h" ]
 }
 
+rtc_source_set("rtc_base_approved") {
+  visibility = [ "*" ]
+  # This target contains the basic approved functionality that WebRTC code can use.
+  # It's a subset of the full rtc_base functionality.
+  deps = [
+    ":checks",
+    ":macromagic",
+    ":stringutils",
+    "system:rtc_export",
+  ]
+}
+
 rtc_library("rtc_task_queue") {
   visibility = [ "*" ]
   sources = [
