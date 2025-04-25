@@ -33,7 +33,7 @@ rtc_library("vvenc_h266_encoder") {
   ]
   
   # Only include the VVenC dependency if it's available
-  if (_has_vvenc_dependency) {
+  if (rtc_has_vvenc_dependency) {
     deps += [ "//third_party/vvenc" ]
   }
   
@@ -67,7 +67,7 @@ rtc_library("vvdec_h266_decoder") {
   ]
   
   # Only include the VVdeC dependency if it's available
-  if (_has_vvdec_dependency) {
+  if (rtc_has_vvdec_dependency) {
     deps += [ "//third_party/vvdec" ]
   }
   
