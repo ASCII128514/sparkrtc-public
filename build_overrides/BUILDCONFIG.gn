@@ -1,0 +1,37 @@
+# Simple BUILDCONFIG.gn for standalone WebRTC build
+
+# Set default values for platform detection.
+is_android = false
+is_ios = false
+is_linux = true  # Assuming we're on Linux
+is_mac = false
+is_win = false
+
+# Set the default toolchain to the one in //build/toolchain/linux:clang_x64
+set_default_toolchain("//build/toolchain/linux:clang_x64")
+
+# Set default values for other build configuration.
+is_debug = true
+is_component_build = false
+is_clang = true
+
+# Define the rtc_* templates
+template("rtc_library") {
+  source_set(target_name) {
+    forward_variables_from(invoker, "*")
+  }
+}
+
+template("rtc_source_set") {
+  source_set(target_name) {
+    forward_variables_from(invoker, "*")
+  }
+}
+
+set_defaults("rtc_library") {
+  configs = []
+}
+
+set_defaults("rtc_source_set") {
+  configs = []
+}

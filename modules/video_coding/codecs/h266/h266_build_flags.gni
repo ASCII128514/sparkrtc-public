@@ -14,7 +14,10 @@ declare_args() {
 
   # Whether the VVdeC dependency is available
   rtc_has_vvdec_dependency = false
+}
 
+# Second declare_args block to reference variables from the first block
+declare_args() {
   # Enable H.266 encoder using VVenC (only if the dependency is available)
   rtc_use_vvenc_h266_encoder = rtc_use_h266 && rtc_has_vvenc_dependency
 
