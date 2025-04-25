@@ -6,10 +6,8 @@
 # in the file PATENTS.  All contributing project authors may
 # be found in the AUTHORS file in the root of the source tree.
 
-import("//build/dotfile_settings.gni")
-
-# The location of the build configuration file.
-buildconfig = "//build/config/BUILDCONFIG.gn"
+# Simplified configuration for standalone build
+buildconfig = "//build_overrides/BUILDCONFIG.gn"
 
 # The python interpreter to use by default. On Windows, this will look
 # for python3.exe and python3.bat.
@@ -34,8 +32,7 @@ no_check_targets = [
 # These are the list of GN files that run exec_script. This whitelist exists
 # to force additional review for new uses of exec_script, which is strongly
 # discouraged except for gypi_to_gn calls.
-exec_script_whitelist = build_dotfile_settings.exec_script_whitelist +
-                        [ "//build_overrides/build.gni" ]
+exec_script_whitelist = [ "//build_overrides/build.gni" ]
 
 default_args = {
   # Webrtc does not support component builds because we are not using the

@@ -1,0 +1,5 @@
+# Simple build file for h266_common
+
+group("default") {
+  deps = [ "//common_video/h266:h266_common" ]
+}
