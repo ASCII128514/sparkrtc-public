@@ -105,7 +105,8 @@ rtc_library("common_video") {
   if (rtc_use_h266) {
     deps += [
       "../rtc_base:checks",
-      "../rtc_base:rtc_base_approved",
+      "../rtc_base:macromagic",
+      "../rtc_base/system:rtc_export",
     ]
   }
   absl_deps = [
