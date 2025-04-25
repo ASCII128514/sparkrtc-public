@@ -12,6 +12,9 @@ if (is_android) {
   import("//build/config/android/rules.gni")
 }
 
+# Import H.266 build flags
+import("../../modules/video_coding/codecs/h266/BUILD.gn")
+
 rtc_source_set("scalability_mode") {
   visibility = [ "*" ]
   sources = [
