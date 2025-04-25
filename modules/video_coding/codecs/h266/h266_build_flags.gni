@@ -9,11 +9,11 @@
 import("../../../../webrtc.gni")
 
 # Check if the required third-party dependencies are available
-_has_vvenc_dependency = exec_script("../../../../build/dir_exists.py",
+_has_vvenc_dependency = exec_script("../../../../webrtc/build/dir_exists.py",
                                    [ "//third_party/vvenc" ],
                                    "string") == "True"
 
-_has_vvdec_dependency = exec_script("../../../../build/dir_exists.py",
+_has_vvdec_dependency = exec_script("../../../../webrtc/build/dir_exists.py",
                                    [ "//third_party/vvdec" ],
                                    "string") == "True"
 
