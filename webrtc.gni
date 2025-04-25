@@ -193,7 +193,7 @@ declare_args() {
   rtc_use_h265 = proprietary_codecs
 
   # Enable to use H266
-  rtc_use_h266 = proprietary_codecs
+  rtc_use_h266 = true
 
   # Enable this flag to make webrtc::Mutex be implemented by absl::Mutex.
   rtc_use_absl_mutex = false
@@ -344,6 +344,9 @@ declare_args() {
 
   # Enable gRPC used for negotiation in multiprocess tests
   rtc_enable_grpc = rtc_enable_protobuf && (is_linux || is_mac)
+  
+  # Enable H.266 in tests
+  include_h266_in_tests = true
 }
 
 # Make it possible to provide custom locations for some libraries (move these
