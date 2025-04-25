@@ -1,0 +1,2 @@
+# Simplified arm.gni for standalone build
+arm_use_neon = false

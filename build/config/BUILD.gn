@@ -1,0 +1,13 @@
+# Simplified build configuration for standalone build
+
+config("compiler_defaults") {
+  configs = [ "//build/config/compiler:default" ]
+}
+
+config("default_libs") {
+  libs = []
+}
+
+config("executable_config") {
+  configs = []
+}

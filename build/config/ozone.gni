@@ -1,0 +1,2 @@
+# Simplified ozone.gni for standalone build
+ozone_platform_x11 = false

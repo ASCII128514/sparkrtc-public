@@ -1,0 +1,4 @@
+# Simplified sysroot.gni for standalone build
+is_fuchsia = false
+use_sysroot = false
+sysroot = ""

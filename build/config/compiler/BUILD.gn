@@ -1,0 +1,25 @@
+# Simplified compiler configuration for standalone build
+
+config("default_include_dirs") {
+  include_dirs = [ "//." ]
+}
+
+config("no_rtti") {
+  cflags_cc = [ "-fno-rtti" ]
+}
+
+config("default_warnings") {
+  cflags = []
+}
+
+config("default_optimization") {
+  cflags = [ "-O2" ]
+}
+
+config("default") {
+  configs = [
+    ":default_include_dirs",
+    ":default_warnings",
+    ":default_optimization",
+  ]
+}

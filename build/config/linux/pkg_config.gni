@@ -1,0 +1,9 @@
+# Simplified pkg_config.gni for standalone build
+import("//build/config/sysroot.gni")
+
+# Empty template for pkg_config
+template("pkg_config") {
+  source_set(target_name) {
+    forward_variables_from(invoker, "*")
+  }
+}

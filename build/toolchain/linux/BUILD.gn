@@ -1,0 +1,23 @@
+# Simplified toolchain for standalone build
+
+toolchain("clang_x64") {
+  tool("cc") {
+    command = "clang -c {{source}} -o {{output}}"
+    description = "CC {{output}}"
+  }
+  
+  tool("cxx") {
+    command = "clang++ -c {{source}} -o {{output}}"
+    description = "CXX {{output}}"
+  }
+  
+  tool("link") {
+    command = "clang++ {{inputs}} -o {{output}}"
+    description = "LINK {{output}}"
+  }
+  
+  tool("stamp") {
+    command = "touch {{output}}"
+    description = "STAMP {{output}}"
+  }
+}
