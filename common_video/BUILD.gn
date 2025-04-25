@@ -54,6 +54,13 @@ rtc_library("common_video") {
     ]
   }
 
+  if (rtc_use_h266) {
+    sources += [
+      "h266/h266_common.cc",
+      "h266/h266_common.h",
+    ]
+  }
+
   deps = [
     "../api:array_view",
     "../api:make_ref_counted",
@@ -92,6 +99,13 @@ rtc_library("common_video") {
     deps += [
       "../rtc_base:compile_assert_c",
       "../rtc_base/containers:flat_map",
+    ]
+  }
+  
+  if (rtc_use_h266) {
+    deps += [
+      "../rtc_base:checks",
+      "../rtc_base:rtc_base_approved",
     ]
   }
   absl_deps = [
@@ -139,6 +153,12 @@ if (rtc_include_tests && !build_with_chromium) {
         "h265/h265_pps_parser_unittest.cc",
         "h265/h265_sps_parser_unittest.cc",
         "h265/h265_vps_parser_unittest.cc",
+      ]
+    }
+
+    if (rtc_use_h266) {
+      sources += [
+        "h266/h266_common_unittest.cc",
       ]
     }
 

@@ -12,6 +12,9 @@ if (is_android) {
   import("//build/config/android/rules.gni")
 }
 
+# Import H.266 build flags
+import("../../modules/video_coding/codecs/h266/BUILD.gn")
+
 rtc_source_set("scalability_mode") {
   visibility = [ "*" ]
   sources = [
@@ -75,6 +78,13 @@ rtc_library("video_codecs_api") {
     sources += [
       "h265_profile_tier_level.cc",
       "h265_profile_tier_level.h",
+    ]
+  }
+  
+  if (rtc_use_vvenc_h266_encoder || rtc_use_vvdec_h266_decoder) {
+    sources += [
+      "h266_profile_tier_level.cc",
+      "h266_profile_tier_level.h",
     ]
   }
 
@@ -268,6 +278,28 @@ rtc_source_set("video_decoder_factory_template_dav1d_adapter") {
   deps = [
     ":video_codecs_api",
     "../../modules/video_coding/codecs/av1:dav1d_decoder",
+  ]
+}
+
+rtc_source_set("video_encoder_factory_template_vvenc_h266_adapter") {
+  visibility = [ "*" ]
+  allow_poison = [ "software_video_codecs" ]
+  public = [ "video_encoder_factory_template_vvenc_h266_adapter.h" ]
+
+  deps = [
+    ":video_codecs_api",
+    "../../modules/video_coding/codecs/h266:vvenc_h266_encoder",
+  ]
+}
+
+rtc_source_set("video_decoder_factory_template_vvdec_h266_adapter") {
+  visibility = [ "*" ]
+  allow_poison = [ "software_video_codecs" ]
+  public = [ "video_decoder_factory_template_vvdec_h266_adapter.h" ]
+
+  deps = [
+    ":video_codecs_api",
+    "../../modules/video_coding/codecs/h266:vvdec_h266_decoder",
   ]
 }
 
