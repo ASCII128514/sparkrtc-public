@@ -72,16 +72,19 @@ std::unique_ptr<VideoDecoderFactory> CreateDecoderFactory() {
 - H.266 is a relatively new codec and may not be supported by all platforms and browsers
 - Hardware acceleration may not be available on all platforms
 - The implementation is experimental and may have performance limitations
+- Requires the VVenC and VVdeC libraries to be installed on the system
 
 ## Future Work
 
 - Improve performance and stability
-- Add support for more H.266 profiles and levels
-- Enhance hardware acceleration support
+- Add hardware acceleration support
+- Optimize for low-latency real-time communication
 - Add support for scalable video coding (SVC) with H.266
+- Add support for more H.266 profiles and levels
 
 ## References
 
 - [H.266/VVC Standard](https://www.itu.int/rec/T-REC-H.266)
 - [VVenC: Fraunhofer Versatile Video Encoder](https://github.com/fraunhoferhhi/vvenc)
 - [VVdeC: Fraunhofer Versatile Video Decoder](https://github.com/fraunhoferhhi/vvdec)
+- [WebRTC.org](https://webrtc.org/)

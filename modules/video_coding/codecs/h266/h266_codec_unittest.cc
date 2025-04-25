@@ -22,13 +22,13 @@ namespace webrtc {
 
 #if defined(RTC_USE_VVENC_H266_ENCODER)
 TEST(H266CodecTest, EncoderIsSupported) {
-  EXPECT_EQ(VVencH266Encoder::IsSupported(), false);  // Not yet implemented
+  EXPECT_EQ(VVencH266Encoder::IsSupported(), true);
 }
 #endif
 
 #if defined(RTC_USE_VVDEC_H266_DECODER)
 TEST(H266CodecTest, DecoderIsSupported) {
-  EXPECT_EQ(VVdecH266Decoder::IsSupported(), false);  // Not yet implemented
+  EXPECT_EQ(VVdecH266Decoder::IsSupported(), true);
 }
 #endif
 
