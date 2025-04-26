@@ -28,6 +28,7 @@
 #include "p2p/base/port.h"
 #include "p2p/base/stun_port.h"
 #include "p2p/base/tcp_port.h"
+#include "p2p/base/quic_port.h"
 #include "p2p/base/turn_port.h"
 #include "p2p/base/udp_port.h"
 #include "rtc_base/checks.h"
@@ -51,9 +52,11 @@ const int PHASE_TCP = 2;
 
 const int kNumPhases = 3;
 
-// Gets protocol priority: UDP > TCP > SSLTCP == TLS.
+// Gets protocol priority: QUIC > UDP > TCP > SSLTCP == TLS.
 int GetProtocolPriority(cricket::ProtocolType protocol) {
   switch (protocol) {
+    case cricket::PROTO_QUIC:
+      return 3;
     case cricket::PROTO_UDP:
       return 2;
     case cricket::PROTO_TCP:
@@ -1443,6 +1446,7 @@ void AllocationSequence::Process(int epoch) {
 
     case PHASE_TCP:
       CreateTCPPorts();
+      CreateQUICPorts();
       state_ = kCompleted;
       break;
 
@@ -1532,6 +1536,26 @@ void AllocationSequence::CreateTCPPorts() {
     port->SetIceTiebreaker(session_->ice_tiebreaker());
     session_->AddAllocatedPort(port.release(), this);
     // Since TCPPort is not created using shared socket, `port` will not be
+    // added to the dequeue.
+  }
+}
+
+void AllocationSequence::CreateQUICPorts() {
+  if (IsFlagSet(PORTALLOCATOR_DISABLE_QUIC)) {
+    RTC_LOG(LS_VERBOSE) << "AllocationSequence: QUIC ports disabled, skipping.";
+    return;
+  }
+
+  std::unique_ptr<Port> port = QuicPort::Create(
+      session_->network_thread(), session_->socket_factory(), network_,
+      session_->allocator()->min_port(), session_->allocator()->max_port(),
+      session_->username(), session_->password(),
+      session_->allocator()->allow_tcp_listen(),  // Reuse TCP listen flag for now
+      session_->allocator()->field_trials());
+  if (port) {
+    port->SetIceTiebreaker(session_->ice_tiebreaker());
+    session_->AddAllocatedPort(port.release(), this);
+    // Since QuicPort is not created using shared socket, `port` will not be
     // added to the dequeue.
   }
 }

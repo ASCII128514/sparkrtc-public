@@ -63,6 +63,9 @@ enum {
   // Disallow use of UDP when connecting to a relay server. Since proxy servers
   // usually don't handle UDP, using UDP will leak the IP address.
   PORTALLOCATOR_DISABLE_UDP_RELAY = 0x1000,
+  
+  // Disable QUIC-based port allocation.
+  PORTALLOCATOR_DISABLE_QUIC = 0x2000,
 
   // When multiple networks exist, do not gather candidates on the ones with
   // high cost. So if both Wi-Fi and cellular networks exist, gather only on the

@@ -39,7 +39,8 @@ enum ProtocolType {
   PROTO_TCP,
   PROTO_SSLTCP,  // Pseudo-TLS.
   PROTO_TLS,
-  PROTO_LAST = PROTO_TLS
+  PROTO_QUIC,
+  PROTO_LAST = PROTO_QUIC
 };
 
 // Defines the interface for a port, which represents a local communication

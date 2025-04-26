@@ -76,7 +76,8 @@ const char RELAY_PORT_TYPE[] = "relay";
 
 static const char* const PROTO_NAMES[] = {UDP_PROTOCOL_NAME, TCP_PROTOCOL_NAME,
                                           SSLTCP_PROTOCOL_NAME,
-                                          TLS_PROTOCOL_NAME};
+                                          TLS_PROTOCOL_NAME,
+                                          QUIC_PROTOCOL_NAME};
 
 const char* ProtoToString(ProtocolType proto) {
   return PROTO_NAMES[proto];

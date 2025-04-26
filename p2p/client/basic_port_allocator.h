@@ -382,6 +382,7 @@ class AllocationSequence : public sigslot::has_slots<> {
   bool IsFlagSet(uint32_t flag) { return ((flags_ & flag) != 0); }
   void CreateUDPPorts();
   void CreateTCPPorts();
+  void CreateQUICPorts();
   void CreateStunPorts();
   void CreateRelayPorts();
 

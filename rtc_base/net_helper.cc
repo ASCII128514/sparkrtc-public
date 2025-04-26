@@ -18,11 +18,15 @@ const char UDP_PROTOCOL_NAME[] = "udp";
 const char TCP_PROTOCOL_NAME[] = "tcp";
 const char SSLTCP_PROTOCOL_NAME[] = "ssltcp";
 const char TLS_PROTOCOL_NAME[] = "tls";
+const char QUIC_PROTOCOL_NAME[] = "quic";
 
 int GetProtocolOverhead(absl::string_view protocol) {
   if (protocol == TCP_PROTOCOL_NAME || protocol == SSLTCP_PROTOCOL_NAME) {
     return kTcpHeaderSize;
   } else if (protocol == UDP_PROTOCOL_NAME) {
+    return kUdpHeaderSize;
+  } else if (protocol == QUIC_PROTOCOL_NAME) {
+    // QUIC uses UDP as transport, so we use the UDP header size
     return kUdpHeaderSize;
   } else {
     // TODO(srte): We should crash on unexpected input and handle TLS correctly.

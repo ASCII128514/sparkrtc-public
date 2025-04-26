@@ -77,6 +77,8 @@ rtc_library("rtc_p2p") {
     "base/tcp_port.h",
     "base/quic_port.cc",
     "base/quic_port.h",
+    "base/quic_library_wrapper.cc",
+    "base/quic_library_wrapper.h",
     "base/quic_transport_channel.cc",
     "base/quic_transport_channel.h",
     "base/quiche_transport_channel.cc",
