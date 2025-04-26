@@ -239,6 +239,9 @@ declare_args() {
   # Includes the dav1d decoder in the internal decoder factory when set to true.
   rtc_include_dav1d_in_internal_decoder_factory = true
 
+  # Enable AV1 encoder using libaom when set to true.
+  rtc_use_libaom_av1_encoder = true
+
   # When enabled, a run-time check will make sure that all field trial keys have
   # been registered in accordance with the field trial policy, see
   # g3doc/field-trials.md. The value can be set to the following:
