@@ -1,0 +1,26 @@
+# Copyright (c) 2025 The WebRTC project authors. All Rights Reserved.
+#
+# Use of this source code is governed by a BSD-style license
+# that can be found in the LICENSE file in the root of the source
+# tree. An additional intellectual property rights grant can be found
+# in the file PATENTS.  All contributing project authors may
+# be found in the AUTHORS file in the root of the source tree.
+
+import("../../webrtc.gni")
+
+rtc_executable("quic_signaling_example") {
+  sources = [
+    "quic_signaling_example.cc",
+  ]
+  deps = [
+    "../../api:candidate",
+    "../../api/transport:data_channel_transport_interface",
+    "../../p2p:rtc_p2p",
+    "../../rtc_base:logging",
+    "../../rtc_base:network",
+    "../../rtc_base:physical_socket_server",
+    "../../rtc_base:socket_address",
+    "../../rtc_base:threading",
+    "//third_party/abseil-cpp/absl/memory",
+  ]
+}
